@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="14" passed="14">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="501" started-at="2013-08-19T01:10:27Z" finished-at="2013-08-19T01:10:28Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="501" started-at="2013-08-19T01:10:27Z" finished-at="2013-08-19T01:10:28Z">
+      <class name="org.commons.jconfig.config.App2ConfigTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="setUp" is-config="true" duration-ms="423" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="cachedContextWithMissingSetType()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="cachedContextWithMissingSetType" duration-ms="7" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <exception class="org.commons.jconfig.config.ConfigRuntimeException">
+            <message>
+              <![CDATA[key SUBSET1 not found in context: {A=706}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.commons.jconfig.config.ConfigRuntimeException: key SUBSET1 not found in context: {A=706}
+	at org.commons.jconfig.config.ConfigContext.get(ConfigContext.java:110)
+	at org.commons.jconfig.internal.ConfigManagerCache$ClassMemConfig.get(ConfigManagerCache.java:67)
+	at org.commons.jconfig.internal.ConfigManagerCache.get(ConfigManagerCache.java:220)
+	at org.commons.jconfig.config.ConfigManager.buildConfigObject(ConfigManager.java:509)
+	at org.commons.jconfig.config.ConfigManager.getConfig(ConfigManager.java:364)
+	at org.commons.jconfig.config.App2ConfigTest.cachedContextWithMissingSetType(App2ConfigTest.java:61)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.commons.jconfig.config.ConfigRuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cachedContextWithMissingSetType -->
+        <test-method status="PASS" signature="contextWithSameKeyValues()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="contextWithSameKeyValues" duration-ms="5" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- contextWithSameKeyValues -->
+        <test-method status="PASS" signature="getBufferSize()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getBufferSize" duration-ms="5" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getBufferSize -->
+        <test-method status="PASS" signature="getBufferSizeMissing()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getBufferSizeMissing" duration-ms="4" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <exception class="org.commons.jconfig.config.KeyNotFound">
+            <message>
+              <![CDATA[ConfigManager: key BufferSize is required and is currently missing]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.commons.jconfig.config.KeyNotFound: ConfigManager: key BufferSize is required and is currently missing
+	at org.commons.jconfig.config.ConfigManager.loadfromValue(ConfigManager.java:569)
+	at org.commons.jconfig.config.ConfigManager.buildConfigObject(ConfigManager.java:514)
+	at org.commons.jconfig.config.ConfigManager.getConfig(ConfigManager.java:364)
+	at org.commons.jconfig.config.App2ConfigTest.getBufferSizeMissing(App2ConfigTest.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.commons.jconfig.config.KeyNotFound -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getBufferSizeMissing -->
+        <test-method status="PASS" signature="getCacheSize()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getCacheSize" duration-ms="7" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCacheSize -->
+        <test-method status="PASS" signature="getCluster()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getCluster" duration-ms="0" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCluster -->
+        <test-method status="PASS" signature="getFarm()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getFarm" duration-ms="4" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getFarm -->
+        <test-method status="PASS" signature="getRocketstatSamplePercent()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getRocketstatSamplePercent" duration-ms="1" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getRocketstatSamplePercent -->
+        <test-method status="PASS" signature="getTimeout()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getTimeout" duration-ms="7" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTimeout -->
+        <test-method status="PASS" signature="getTimeoutProblem1()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getTimeoutProblem1" duration-ms="1" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTimeoutProblem1 -->
+        <test-method status="PASS" signature="getTimeoutProblem2()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="getTimeoutProblem2" duration-ms="1" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getTimeoutProblem2 -->
+        <test-method status="PASS" signature="returnDifferentConfigInstancesForDifferentContexts()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="returnDifferentConfigInstancesForDifferentContexts" duration-ms="6" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- returnDifferentConfigInstancesForDifferentContexts -->
+        <test-method status="PASS" signature="returnsSingletonInstance()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="returnsSingletonInstance" duration-ms="0" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- returnsSingletonInstance -->
+        <test-method status="PASS" signature="testCachedConfigInstance()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="testCachedConfigInstance" duration-ms="1" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:27Z">
+          <exception class="org.commons.jconfig.config.ConfigRuntimeException">
+            <message>
+              <![CDATA[key SUBSET1 not found in context: {}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.commons.jconfig.config.ConfigRuntimeException: key SUBSET1 not found in context: {}
+	at org.commons.jconfig.config.ConfigContext.get(ConfigContext.java:110)
+	at org.commons.jconfig.internal.ConfigManagerCache$ClassMemConfig.get(ConfigManagerCache.java:67)
+	at org.commons.jconfig.internal.ConfigManagerCache.get(ConfigManagerCache.java:220)
+	at org.commons.jconfig.config.ConfigManager.buildConfigObject(ConfigManager.java:509)
+	at org.commons.jconfig.config.ConfigManager.getConfig(ConfigManager.java:364)
+	at org.commons.jconfig.config.App2ConfigTest.testCachedConfigInstance(App2ConfigTest.java:150)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.commons.jconfig.config.ConfigRuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCachedConfigInstance -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:org.commons.jconfig.config.App2ConfigTest@5ddc0e7a]" name="tearDown" is-config="true" duration-ms="4" started-at="2013-08-18T18:10:27Z" finished-at="2013-08-18T18:10:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.commons.jconfig.config.App2ConfigTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

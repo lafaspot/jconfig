@@ -1,0 +1,7 @@
+{
+   "Modules" : {
+        "com.yahoo.common.config.ConfigManagerConfig" : {
+            "ConfigPath" : "src/test/resources"
+        }
+    }
+}

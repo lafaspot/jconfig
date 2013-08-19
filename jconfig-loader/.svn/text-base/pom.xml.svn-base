@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>yahoo.yinst.yjava_ymail_configuration</groupId>
+		<artifactId>yjava_ymail_configuration</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>yahoo.yinst.yjava_ymail_config_loader</groupId>
+	<artifactId>yjava_ymail_config_loader</artifactId>
+	<packaging>jar</packaging>
+	<name>${project.artifactId}</name>
+	<url>http://java.corp.yahoo.com/javadocs/${project.name}/latest/${project.name}.jar/javadoc/</url>
+	<description>Config Loader code: ${project.name} package</description>
+
+	<issueManagement>
+		<system>Yahoo! Corporate Bugzilla</system>
+		<url>http://bug.corp.yahoo.com/buglist.cgi?query_format=advanced&amp;product_name=mail&amp;component=xmas&amp;bug_status=__open__</url>
+	</issueManagement>
+
+	<scm>
+		<developerConnection>scm:svn:svn+ssh://svn.corp.yahoo.com/yahoo/mail/yahoo/libraries/yjava_ymail_config/trunk</developerConnection>
+		<url>http://svn.corp.yahoo.com/view/yahoo/mail/yahoo/libraries/yjava_ymail_config/trunk</url>
+	</scm>
+
+	<mailingLists>
+		<mailingList>
+			<name>ymail-jedi</name>
+			<subscribe>http://ilist.yahoo.com/wws/subscribe/ymail-jedi/</subscribe>
+			<unsubscribe>http://ilist.yahoo.com/wws/signoff/ymail-jedi/</unsubscribe>
+			<post>mailto:ymail-jedi@yahoo-inc.com</post>
+			<archive>http://ilist.yahoo.com/wws/arc/ymail-jedi</archive>
+		</mailingList>
+	</mailingLists>
+
+	<build>
+		<plugins>
+ 			<plugin>
+ 				<groupId>org.apache.maven.plugins</groupId>
+ 				<artifactId>maven-dependency-plugin</artifactId>
+ 				<executions>
+ 					<execution>
+ 						<id>copy-dependencies</id>
+ 						<phase>prepare-package</phase>
+ 						<goals>
+ 							<goal>copy-dependencies</goal>
+ 						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/libs</outputDirectory>
+							<!-- YCA excluded because it is provided since it is a JNI library -->
+							<excludeArtifactIds>${excludedJNILibraries}</excludeArtifactIds>
+							<excludeArtifactIds>${excludedTestLibraris}</excludeArtifactIds>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<type>jar</type>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Pure Java dependencies -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>yahoo.yinst.yjava_ymail_jdk_tools</groupId>
+			<artifactId>yjava_ymail_jdk_tools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>yahoo.yinst.yjava_ymail_config_manager</groupId>
+			<artifactId>yjava_ymail_config_manager</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>yahoo.yinst.yjava_ymail_common</groupId>
+            <artifactId>yjava_ymail_common</artifactId>
+        </dependency>
+
+		<!-- Test dependencies -->
+		<!-- Special Note : both mockit and tools contain the com.sun.attach package. -->
+		<!-- Need to make sure we use the tools version; hence the mockit dependency 
+			must be listed after the tools dependency above -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.jmockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.2.1</version>
+        </dependency>        
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>1.3.2</version>
+		</dependency>		
+	</dependencies>
+</project>

@@ -1,0 +1,17 @@
+package com.yahoo.common.config.internal.jmx;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class ConfigManagerJmxTest {
+
+    @Test
+    public void ConfigManagertest() {
+        
+        String vmName = "foo"; 
+        ConfigManagerJmxMXBean a = new ConfigManagerJmx(vmName);
+        
+        Assert.assertEquals(a.getVMName(), "foo");
+    }
+}
+

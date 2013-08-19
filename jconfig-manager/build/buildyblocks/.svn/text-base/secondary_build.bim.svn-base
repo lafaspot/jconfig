@@ -1,0 +1,21 @@
+# Specify include files
+includes: build.bim
+
+# used by buildyblocks_yroot_create
+
+# yroot name
+yroot: yjava_ymail_config_manager_secondary
+
+# remove yroot
+yroot_remove: true
+
+# Here we copy in our headless identify file from the
+# ymail_dist_push_private_key keyed yinst package.
+yroot_copy_files:
+    /home/y/var/ymail/ymeng-identity
+    /home/y/conf/clover/clover.license
+    /home/y/conf/coverity/license.dat
+    /home/y/conf/keydb/ymail_build_user.keydb
+
+# Dist packages to the quarantine branch.
+dist_push_pkg_globs: ../../target/yinst/yjava_ymail_*.tgz

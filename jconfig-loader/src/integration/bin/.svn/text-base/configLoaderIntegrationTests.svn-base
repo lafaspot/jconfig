@@ -1,0 +1,13 @@
+APPNAME=yjava_ymail_config_loader_test
+# Where the JARs are.
+LIBDIR=/home/y/libexec/yjava_ymail_config_loader_test/lib
+
+# The classpath.
+CP=
+for j in $LIBDIR/*.jar
+do
+  CP=$CP:$j
+done
+
+# No args
+java -cp $CP org.testng.TestNG -groups integration -d /home/y/logs/$APPNAME/ -testclass com.yahoo.configloader.test.ConfigIntegrationTest

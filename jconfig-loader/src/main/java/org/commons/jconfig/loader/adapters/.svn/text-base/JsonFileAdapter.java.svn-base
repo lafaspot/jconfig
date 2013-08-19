@@ -1,0 +1,67 @@
+package com.yahoo.configloader.adapters;
+
+import javax.annotation.Nonnull;
+
+import org.codehaus.jackson.JsonNode;
+
+import com.yahoo.common.config.ConfigException;
+import com.yahoo.common.config.ConfigLoaderAdapterID;
+
+/**
+ * 
+ * Implements the standard autoConf configuration source defined at
+ * {@http://twiki.corp.yahoo.com/view/Mail/XMASConfigManagement_editConfigs}
+ * 
+ * @author aabed
+ *
+ */
+public class JsonFileAdapter implements Adapter {
+
+    @Nonnull
+    private final AutoConf autoconf;
+
+    public JsonFileAdapter(@Nonnull final AutoConf autoconf) {
+        this.autoconf = autoconf;
+    }
+    /**
+     * @return the uri of the AutoConf adapter
+     */
+    @Override
+    public String getUri() {
+        return ConfigLoaderAdapterID.JSON_AUTOCONF.getUri();
+    }
+
+    /**
+     * Load the standard AutoConf Json returning a Json node that adheres to the
+     * standard autoConf Json syntax
+     * 
+     * autoConf :
+     * {@http://twiki.corp.yahoo.com/view/Mail/XMASConfigManagement_editConfigs
+     * }
+     * 
+     * @return autoConf JsonNode
+     * @throws ConfigSourceException
+     */
+    @Override
+    public JsonNode getModuleNode(final String appName, final String moduleName) throws ConfigException {
+        /*
+         * look for module in the app parent node first as modules listed
+         * directly by the parent takes precedence over modules listed in the
+         * common "Modules" section.
+         */
+        JsonNode moduleNode = autoconf.getModule(appName, moduleName);
+        /*
+         * If moduleNode found null, than build from commond "Modules" nodes
+         */
+        if ( moduleNode == null ) {
+            moduleNode = autoconf.getModule(JsonFileAdapter.MODULES_NODE, moduleName);
+        }
+
+        return moduleNode;
+    }
+
+    /**
+     * autoConf defined node names
+     */
+    private static String MODULES_NODE = "Modules";
+}

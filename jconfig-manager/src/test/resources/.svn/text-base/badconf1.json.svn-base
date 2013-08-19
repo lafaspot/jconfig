@@ -1,0 +1,15 @@
+<<<<<<< .mine
+=======
+{
+   "Modules" : {
+                "com.yahoo.livewords.livewordsclient.LWConfig" : {
+                        "_Sets_Type_": "COLO",
+                        "_Sets_": [],
+                        "Group" : "livewords",
+                        "Segz" : 65535
+                }
+        }
+}
+
+
+>>>>>>> .r346652

@@ -1,0 +1,19 @@
+# Set methods on config classes can have a ConfigResourceId("ymail.xmas.common.local_farm")
+ymail.xmas.common.local_farm=323
+ymail.xmas.common.rocketstat_sample_percent=30
+ymail.xmas.common.local_cluster=mud
+
+## Config value parsing test values
+
+# Full name with class and method name "com.yahoo.common.config.App2Config.Timeout"
+com.yahoo.common.config.App2ConfigPropertiesTest$App2ConfigMissingProps.Timeout=500s
+
+# Short name method name "TimeoutProblem1"
+TimeoutProblem1=500 aB
+TimeoutProblem2=
+
+# Byte Value with no default
+com.yahoo.common.config.App2ConfigPropertiesTest$App2ConfigMissingProps.CacheSize= 2 MiB
+
+# this key should be commented out for the test case to Fail
+# BufferSize= 3 MiB

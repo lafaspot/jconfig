@@ -1,0 +1,11 @@
+package com.yahoo.common.config;
+
+import com.yahoo.common.config.annotations.Config;
+import com.yahoo.common.config.annotations.ConfigResource;
+
+@Config(description = "Config Loader Config Classs")
+@ConfigResource(name = "yjava_ymail_config_loader.json")
+public class Test1 {
+
+}
+

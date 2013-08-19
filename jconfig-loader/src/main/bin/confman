@@ -1,0 +1,41 @@
+#!/bin/sh
+# configLoder
+# Fires up all listeners in /home/y/libexec/yjava_ymail_config_loader/lib
+#
+
+# Where the JARs are.
+LIBDIR=/home/y/libexec/yjava_ymail_config_loader/lib
+
+# The classpath.
+CP=
+for j in $LIBDIR/*.jar
+do
+  CP=$CP:$j
+done
+for j in ./target/*.jar
+do
+  CP=$CP:$j
+done
+for j in ./target/libs/*.jar
+do
+  CP=$CP:$j
+done
+
+
+
+# The configLoader configuration directory
+CONFDIR=/home/y/conf/yjava_ymail_config_loader:./src/main/conf
+CP=$CP:$CONFDIR
+
+# In case options are passed in
+if [ $# -eq 1 ]
+then
+    java -cp $CP com.yahoo.configloader.ConfManCmd $1
+    exit 0
+fi
+
+
+# No args
+# DEBUG=-Xdebug -Xrunjdwp:transport=dt_socket,address=4080,server=y,suspend=n
+DEBUG=
+java $DEBUG -cp $CP com.yahoo.configloader.ConfManCmd $1 $2 $3 $4 $5 $6

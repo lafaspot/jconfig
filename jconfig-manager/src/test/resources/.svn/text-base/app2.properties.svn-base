@@ -1,0 +1,15 @@
+ymail.xmas.common.rocketstat_sample_percent=30
+ymail.xmas.common.local_cluster=mud
+ymail.xmas.common.local_farm=323
+
+# full package and class name can also be used to set values on the config class
+# this allow for 2 config classes to consume the same file, in case2 methods shared the same name
+# timeout problems. The example here just uses one inner config class.
+# using package names to set config values, it is not recomended for production.
+com.yahoo.common.config.App2ConfigPropertiesTest$App2ConfigProperties.Timeout=500s
+TimeoutProblem1=500 aB
+TimeoutProblem2=
+
+# Byte Value with no default
+com.yahoo.common.config.App2ConfigPropertiesTest$App2ConfigProperties.CacheSize= 2 MiB
+com.yahoo.common.config.App2ConfigPropertiesTest$App2ConfigProperties.BufferSize= 3 MiB

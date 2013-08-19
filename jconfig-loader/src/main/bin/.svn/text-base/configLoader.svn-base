@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+
+# Where the JARs are.
+LIBDIR=/home/y/libexec/yjava_ymail_config_loader/lib
+
+APPNAME=yjava_ymail_config_loader
+
+# return all pids for loader process
+function get_pids(){
+    PID=`ps aux | grep "libexec/yjava_ymail_config_loader" | grep 'bin/java' | grep -v grep | awk '{ print $2; }' | sed s/\s+//`;
+}
+
+# validates and exits if config loader is already running.# 
+function isAppRunning() {
+    get_pids
+    if [ -z "$PID" ]; then
+        echo "$APPNAME is not running. It is safe to start new process." 
+    else
+        echo "$APPNAME appears to still be running with PID $PID. Start aborted."
+        exit 1
+    fi  
+}
+
+# The classpath.
+CP=
+for j in $LIBDIR/*.jar
+do
+  CP=$CP:$j
+done
+
+# The configLoader configuration directory
+CONFDIR=/home/y/conf/yjava_ymail_config_loader
+CP=$CP:$CONFDIR
+
+#set initial Java heap size
+JAVA_OPTS="-Xms2048m"
+
+#validates and exits if loader is already running.
+isAppRunning
+
+# In case options are passed in
+if [ $# -eq 1 ]
+then
+    java $JAVA_OPTS -cp $CP com.yahoo.configloader.ConfigLoaderRunner $1
+    exit 0
+fi
+
+# No args
+# DEBUG=-Xdebug -Xrunjdwp:transport=dt_socket,address=4080,server=y,suspend=n
+DEBUG=
+java $DEBUG $JAVA_OPTS -cp $CP com.yahoo.configloader.ConfigLoaderRunner
