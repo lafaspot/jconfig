@@ -1,0 +1,34 @@
+{
+   "Modules":{
+      "org.commons.jconfig.configloader.ConfigLoaderConfig":{
+         "_Sets_Type_":"TLD",
+         "_Sets_":[
+            {
+               "key":[
+                  "com"
+               ],
+               "keyList":{
+                  "JmxFileName" : "/tmp/jmx",
+                  "JmxReadInterval" : "60s",
+                  "ConfigFileName" : "/tmp/xyz.json",
+                  "ConfigServerURL" : "/xyz_confman_configs/",
+                  "ConfigServerReadInterval" : "5s",
+                  "ConfigSyncInterval" : "2s" 
+               }
+            },
+            {
+               "key":[
+                  "jp"
+               ],
+               "keyList":{
+                  "JmxFileName" : "/home/y/logs/yjava_xyz_config_loader/jmx",
+                  "JmxReadInterval" : "60s",
+                  "ConfigFileName" : "/home/y/conf/yjava_xyz_config_loader/xyz.json",
+                  "ConfigServerURL" : "http://cascade006.mail.ne1.xyz.com:4080/xyz_confman_configs/",
+                  "ConfigServerReadInterval" : "1m"
+               }
+            }
+         ]
+      }
+   }
+}

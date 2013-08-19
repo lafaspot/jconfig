@@ -1,0 +1,8 @@
+package com.yahoo.common.config.internal;
+
+import com.yahoo.common.config.ConfigException;
+
+
+public interface ConfigAdapter<T> {
+    void loadValue(ConfigManagerCache jmxloader)throws ConfigException;
+}

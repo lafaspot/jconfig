@@ -1,0 +1,31 @@
+{
+   "Modules" : {
+		"org.commons.jconfig.config.App4Config" : {
+			"GetMetaData"="2002",
+			"GetUserData"="2002",
+			"SetMetaData"="777",
+			"SetUserData"="6006",
+			"FetchExternalMail"="555",
+			"GetMessageBodyPart"="2730",
+			"GetMessageRawHeader"="2730",
+			"GetMessage"="2730",
+			"GetDisplayMessage"="2730",
+			"ListFolders"="1876",
+			"ListMessagesFromIds"="3753",
+			"ListMessages"="3753",
+			"SearchMessages"="18768",
+			"CreateFolder"="5460",
+			"RemoveFolder"="5460",
+			"DeleteMessages"="910",
+			"EmptyFolder"="5460",
+			"MoveMessages"="910",
+			"RenameFolder"="5460",
+			"ResetSpamFilter"="910",
+			"SetMessageFlag"="910",
+			"VirusScanAttachments"="910",
+			"SaveMessage"="10010",
+			"SaveRawMessage"="10010",
+			"SendMessage"="15015"
+		}
+	}
+}

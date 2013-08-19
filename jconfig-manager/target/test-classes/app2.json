@@ -1,0 +1,42 @@
+{
+   "Modules" : {
+		"org.commons.jconfig.config.App2Config" : {
+		    "_Sets_Type_": "SUBSET1",
+			"_Sets_": [
+                {           
+                    "key": [ "800" ],
+                    "keyList": {
+	                    "xyz.xmas.common.local_farm" : "800",
+    	                "xyz.xmas.common.local_cluster" : "ne1",
+        	            "xyz.xmas.common.rocketstat_sample_percent": "25",
+        	            "Timeout" : "500s"
+                    }
+                },
+                {   
+                    "key": [ "706" ],
+                    "keyList": {
+	                    "xyz.xmas.common.local_farm" : "706",
+    	                "xyz.xmas.common.local_cluster" : "gq1",
+        	            "xyz.xmas.common.rocketstat_sample_percent": "20",
+        	            "Timeout" : "500s"
+                	}
+                },
+                {
+                    "key": [ "505" ],
+                    "keyList": {
+	                    "xyz.xmas.common.local_farm" : "505",
+    	                "xyz.xmas.common.local_cluster" : "mud",
+        	            "xyz.xmas.common.rocketstat_sample_percent": "30",
+        	            "Timeout" : "500s"
+                	}
+                }
+            ],
+			"TimeoutProblem1" : "4s",
+			"TimeoutProblem2" : "16h",
+			"CacheSize" : "2 MiB",
+			"BufferSize" : "3 MiB",
+			"xyz.xmas.common.local_farm" : "007"
+		}
+	}
+}
+
