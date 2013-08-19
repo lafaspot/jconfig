@@ -1,9 +1,0 @@
-{
-   "Modules" : {
-        "com.yahoo.common.config.ConfigManagerConfig" : {
-            "ConfigPath" : "src/test/resources",
-            "LoadFrom" : "JMX",
-            "ConfigLoaderSyncInterval" : "10s"
-        }
-    }
-}

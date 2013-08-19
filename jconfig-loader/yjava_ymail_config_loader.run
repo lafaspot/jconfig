@@ -1,2 +1,0 @@
-#!/bin/sh
-exec /home/y/bin/setuidgid yahoo /home/y/libexec/yjava_ymail_config_loader/bin/configLoader >> /home/y/logs/yjava_ymail_config_loader/yjava_ymail_config_loader.out  2>&1
