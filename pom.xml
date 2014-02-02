@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 	<version>4.0-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
-	<url>http://twiki.corp.yahoo.com/view/Mail/XMASConfigManagement</url>
+	<url>https://github.com/jaikit/jconfig</url>
 	<description>Parent POM file for project ${project.name}</description>
 	<prerequisites>
 		<maven>2.1</maven>
