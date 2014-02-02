@@ -1,60 +1,62 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>org.commons.jconfig</groupId>
-		<artifactId>jconfig-configuration</artifactId>
-		<version>4.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.commons.jconfig.manager</groupId>
-	<artifactId>jconfig-manager</artifactId>
-	<packaging>jar</packaging>
-	<name>${project.artifactId}</name>
-	<url>http://java.corp.yahoo.com/javadocs/${project.name}/latest/${project.name}.jar/javadoc/</url>
-	<description>Config Manager code: ${project.name} package</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.commons.jconfig</groupId>
+        <artifactId>jconfig-configuration</artifactId>
+        <version>4.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.commons.jconfig.manager</groupId>
+    <artifactId>jconfig-manager</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <url>https://github.com/jaikit/jconfig</url>
+    <description>Config Manager code: ${project.name} package</description>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/jaikit/jconfig/issues</url>
+    </issueManagement>
 
-	<scm>
-		<developerConnection>scm:svn:svn+ssh://svn.corp.yahoo.com/yahoo/mail/yahoo/libraries/yjava_ymail_configuration/trunk</developerConnection>
-		<url>http://svn.corp.yahoo.com/view/yahoo/mail/yahoo/libraries/yjava_ymail_configuration/trunk</url>
-	</scm>
-	<dependencies>
-		<!-- Pure Java dependencies -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>jsr305</artifactId>
-		</dependency>	
-		<!-- Test dependencies -->
-		<!-- Special Note : both mockit and tools contain the com.sun.attach package. -->
-		<!-- Need to make sure we use the tools version; hence the mockit dependency 
-			must be -->
-		<!-- listed after the tools dependency above -->
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.jmockit</groupId>
-			<artifactId>jmockit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- Pure Java dependencies -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+        <!-- Test dependencies -->
+        <!-- Special Note : both mockit and tools contain the com.sun.attach 
+            package. -->
+        <!-- Need to make sure we use the tools version; hence the mockit 
+            dependency must be -->
+        <!-- listed after the tools dependency above -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
   
