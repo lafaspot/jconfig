@@ -1,7 +1,0 @@
-{
-   "Modules" : {
-        "org.commons.jconfig.config.ConfigManagerConfig" : {
-            "ConfigPath" : "src/test/resources"
-        }
-    }
-}
