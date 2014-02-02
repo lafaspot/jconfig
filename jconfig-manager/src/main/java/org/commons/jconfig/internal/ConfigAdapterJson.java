@@ -125,7 +125,7 @@ public class ConfigAdapterJson implements ConfigAdapter<String> {
 
 
     /* (non-Javadoc)
-     * @see com.yahoo.common.config.internal.ConfigAdapter#loadValue(com.yahoo.common.config.internal.ConfigAdapterJmx, java.lang.String)
+     * @see common.config.internal.ConfigAdapter#loadValue(common.config.internal.ConfigAdapterJmx, java.lang.String)
      */
     @Override
     public void loadValue(final ConfigManagerCache jmxloader) throws ConfigException {

@@ -89,7 +89,7 @@ public class ConfigManagerCache {
                     {
                         "key": [ "ne1"],
                         "keyList": {
-                            "SonoraHostname" : "stage1.sonora.bf1.yahoo.com"
+                            "SonoraHostname" : "google.com"
                         }
 
                     }
@@ -198,8 +198,8 @@ public class ConfigManagerCache {
     /*
      * (non-Javadoc)
      * 
-     * @see com.yahoo.common.config.internal.ConfigFormat#get(java.lang.Object,
-     * com.yahoo.common.config.ConfigContext, java.lang.String,
+     * @see common.config.internal.ConfigFormat#get(java.lang.Object,
+     * common.config.ConfigContext, java.lang.String,
      * java.lang.String)
      */
     public String get(final Object config, final ConfigContext context, final String field, final String defaultValue) {
@@ -268,7 +268,7 @@ public class ConfigManagerCache {
                 {
                     "key": [ "ne1" ],
                     "keyList": {
-                        "SonoraHostname" : "stage1.sonora.bf1.yahoo.com"
+                        "SonoraHostname" : "google.com"
                     }
                 }
             ],

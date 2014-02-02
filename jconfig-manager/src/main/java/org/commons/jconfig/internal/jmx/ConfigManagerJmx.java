@@ -39,7 +39,7 @@ public class ConfigManagerJmx implements ConfigManagerJmxMXBean {
     }
 
     /* (non-Javadoc)
-     * @see com.yahoo.common.config.internal.jmx.ConfigManagerJmxMXBean#getVersion()
+     * @see common.config.internal.jmx.ConfigManagerJmxMXBean#getVersion()
      */
     @Override
     public int getConfigHashCode() {
@@ -47,7 +47,7 @@ public class ConfigManagerJmx implements ConfigManagerJmxMXBean {
     }
 
     /* (non-Javadoc)
-     * @see com.yahoo.common.config.internal.jmx.ConfigManagerJmxMXBean#setVersion(int)
+     * @see common.config.internal.jmx.ConfigManagerJmxMXBean#setVersion(int)
      */
     @Override
     public void updateConfigHashCode(int hashCode) {
@@ -55,7 +55,7 @@ public class ConfigManagerJmx implements ConfigManagerJmxMXBean {
     }
 
     /* (non-Javadoc)
-     * @see com.yahoo.common.config.internal.jmx.ConfigManagerJmxMXBean#flipCache()
+     * @see common.config.internal.jmx.ConfigManagerJmxMXBean#flipCache()
      */
     @Override
     public void flipCache() {

@@ -19,8 +19,8 @@ public class CompositeDataExtractor implements Extractor {
      * (non-Javadoc)
      * 
      * @see
-     * com.yahoo.common.config.serializers.Extractor#extractObject(com.yahoo
-     * .common.config.serializers.ObjectToJsonConverter, java.lang.Object)
+     * common.config.serializers.Extractor#extractObject(com.yahoo
+     * common.config.serializers.ObjectToJsonConverter, java.lang.Object)
      */
     @Override
     public JsonElement extractObject(ObjectToJsonConverter pConverter, Object pValue) throws AttributeNotFoundException {

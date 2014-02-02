@@ -18,7 +18,7 @@ public class BasicExtractor implements Extractor {
      * (non-Javadoc)
      * 
      * @see
-     * com.yahoo.common.config.serializers.Extractor#extractObject(com.yahoo
+     * common.config.serializers.Extractor#extractObject(com.yahoo
      * .common.config.serializers.ObjectToJsonConverter, java.lang.Object)
      */
     @Override

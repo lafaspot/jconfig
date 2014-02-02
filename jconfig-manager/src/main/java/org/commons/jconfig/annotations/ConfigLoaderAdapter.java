@@ -10,7 +10,7 @@ import org.commons.jconfig.config.ConfigLoaderAdapterID;
 
 
 /**
- * Specifies the @com.yahoo.common.config.ConfigManager.ConfigLoaderAdapterID to use
+ * Specifies the @common.config.ConfigManager.ConfigLoaderAdapterID to use
  * for the annotated config class.
  * 
  * If this is not specified by annotated config class, the ConfigLoaderAdapterID.JSON

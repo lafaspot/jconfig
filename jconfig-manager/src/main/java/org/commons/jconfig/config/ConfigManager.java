@@ -481,7 +481,7 @@ public enum ConfigManager {
                  * names 3. Specified separately by annotation @ConfigResourceId
                  * 
                  * fieldList = [Timeout,
-                 * com.yahoo.common.config.App2Config.Timeout]
+                 * common.config.App2Config.Timeout]
                  * 
                  * Look for each field in configFormat instance for it value.
                  */
