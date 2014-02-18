@@ -1,0 +1,11 @@
+{
+   "Modules" : {
+		"org.commons.jconfig.config.App3Config" : {
+			"RateLimit": {
+				"Min":6006,
+				"Max":30030		
+			},
+			"UserData":"2002"
+		}
+	}
+}

@@ -1,0 +1,8 @@
+{
+   "Modules" : {
+        "org.commons.jconfig.config.ConfigManagerConfig" : {
+            "ConfigLoaderSyncInterval": "60s",
+            "LoadFrom" : "JMX"
+        }
+    }
+}

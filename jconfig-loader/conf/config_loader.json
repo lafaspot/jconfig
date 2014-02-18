@@ -1,0 +1,11 @@
+{
+   "Modules" : {
+        "org.commons.jconfig.configloader.ConfigLoaderConfig" : {
+            "ConfigServerURL": "localhost",
+            "LoadFromServer" : false,
+            "JmxFileName" : "/Users/kinjalkhandhar/git/jconfig/jconfig-loader/logs/jmx",
+            "ConfigPath" : "/Users/kinjalkhandhar/git/jconfig/jconfig-loader/conf/",
+            "ConfigFileName" : "/Users/kinjalkhandhar/git/jconfig/jconfig-loader/conf/mergedConf.json"
+        }
+    }
+}
