@@ -12,7 +12,6 @@ import org.commons.jconfig.annotations.TimeRange;
 import org.commons.jconfig.datatype.TimeValue;
 import org.commons.jconfig.datatype.ValueType;
 
-
 /**
  * ConfigManager Config
  */
@@ -22,8 +21,7 @@ public class ConfigManagerConfig {
 
     private String mConfigPath = "/etc/configmanager";
 
-    @ConfigGet(description = "Config location path", type = ValueType.String, defaultValue = "/etc/configmanager"
-    )
+    @ConfigGet(description = "ConfigManager config location path. If not found here - it will be picked up from classpath.", type = ValueType.String, defaultValue = "/etc/configmanager")
     public String getConfigPath() {
         return mConfigPath;
     }
@@ -36,11 +34,8 @@ public class ConfigManagerConfig {
 
     private String loadFrom = "FILESYSTEM";
 
-    @ConfigGet(
-            description = "Config's can be loaded, updated via multiple options. Options enabled so far are 'FILESYSTEM' and 'JMX'",
-            type = ValueType.String,
-            defaultValue = "FILESYSTEM")
-            public String getLoadFrom() {
+    @ConfigGet(description = "Config's can be loaded, updated via multiple options. Options enabled so far are 'FILESYSTEM' and 'JMX'", type = ValueType.String, defaultValue = "FILESYSTEM")
+    public String getLoadFrom() {
         return loadFrom;
     }
 
@@ -52,11 +47,8 @@ public class ConfigManagerConfig {
 
     private Number maxCacheSize = 10000;
 
-    @ConfigGet(
-            description = "Max size for config object cache size. The size is the maximun number of config objects in cache.",
-            type = ValueType.Number,
-            defaultValue = "10000")
-            public Number getMaxCacheSize() {
+    @ConfigGet(description = "Max size for config object cache size. The size is the maximun number of config objects in cache.", type = ValueType.Number, defaultValue = "10000")
+    public Number getMaxCacheSize() {
         return maxCacheSize;
     }
 
@@ -66,7 +58,8 @@ public class ConfigManagerConfig {
         maxCacheSize = size;
     }
 
-    private TimeValue configLoaderSyncInterval = new TimeValue(15, TimeUnit.SECONDS);
+    private TimeValue configLoaderSyncInterval = new TimeValue(15,
+            TimeUnit.SECONDS);
 
     /**
      * How much time to wait for Config Loader to push in new values
@@ -84,4 +77,3 @@ public class ConfigManagerConfig {
         configLoaderSyncInterval = timeValue;
     }
 }
-

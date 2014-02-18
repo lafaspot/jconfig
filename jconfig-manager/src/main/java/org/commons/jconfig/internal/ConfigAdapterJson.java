@@ -28,12 +28,8 @@ import com.google.gson.JsonSyntaxException;
  * Encapsulation for parsing and saving Json config. The config values will be
  * saved to instance variable keyMap
  * 
- * Structure of keyMap after parsing:
- * {
- *      FARM1 : { a:b, d:e },
- *      FARM2 : {f:d, z:y },
- *      _Defs_ : {a:x}
- * }
+ * Structure of keyMap after parsing: { FARM1 : { a:b, d:e }, FARM2 : {f:d, z:y
+ * }, _Defs_ : {a:x} }
  * 
  * @author lafa
  * @author jaikit
@@ -42,7 +38,9 @@ import com.google.gson.JsonSyntaxException;
 public class ConfigAdapterJson implements ConfigAdapter<String> {
     private final Logger logger = Logger.getLogger(ConfigAdapterJson.class);
 
-    private InputStream getStream(final String uri, final Charset charset, final ConfigManagerConfig internalConfig) {
+    private InputStream getStream(final String uri, final Charset charset,
+            final ConfigManagerConfig internalConfig) {
+        logger.info("config uri: " + uri);
         File dir = new File(internalConfig.getConfigPath());
         if (dir.isDirectory()) {
             File config = new File(dir.getAbsolutePath() + File.separator + uri);
@@ -50,19 +48,26 @@ public class ConfigAdapterJson implements ConfigAdapter<String> {
                 try {
                     return new FileInputStream(config);
                 } catch (FileNotFoundException e) {
-                    logger.warn("File not found: '" + config.getAbsolutePath() + "'");
+                    logger.warn("File not found: '" + config.getAbsolutePath()
+                            + "'");
                 }
             } else {
-                logger.warn("Failed to load configuration for resource '" + config.getAbsolutePath() + "'");
+                logger.warn("Failed to load configuration for resource '"
+                        + config.getAbsolutePath() + "'");
             }
         } else {
             if (logger.isTraceEnabled())
-                logger.trace("File not found: '" + dir.getAbsolutePath() + File.separator + uri + "'");
+                logger.trace("File not found: '" + dir.getAbsolutePath()
+                        + File.separator + uri + "'");
         }
         // trying classpath
         InputStream in = getClass().getResourceAsStream("/" + uri);
         if (in == null) {
-            logger.error("Failed to load configuration for resource '" + uri + "' from classpath.");
+            in = getClass().getResourceAsStream(uri);
+            if (in == null) {
+                logger.error("Failed to load configuration for resource '"
+                        + uri + "' from classpath.");
+            }
         }
         return in;
     }
@@ -71,7 +76,9 @@ public class ConfigAdapterJson implements ConfigAdapter<String> {
     private final Charset charset;
     private final ConfigManagerConfig internalConfig;
 
-    public ConfigAdapterJson(@Nonnull final String uri, @Nonnull final Charset charset, @Nonnull final ConfigManagerConfig internalConfig) {
+    public ConfigAdapterJson(@Nonnull final String uri,
+            @Nonnull final Charset charset,
+            @Nonnull final ConfigManagerConfig internalConfig) {
         this.uri = uri;
         this.charset = charset;
         this.internalConfig = internalConfig;
@@ -112,8 +119,9 @@ public class ConfigAdapterJson implements ConfigAdapter<String> {
             }
         },
         /**
-         * Used in place of default module when adapter is load via properties file.
-         *
+         * Used in place of default module when adapter is load via properties
+         * file.
+         * 
          */
         _PROP_ {
             @Override
@@ -123,12 +131,16 @@ public class ConfigAdapterJson implements ConfigAdapter<String> {
         }
     }
 
-
-    /* (non-Javadoc)
-     * @see common.config.internal.ConfigAdapter#loadValue(common.config.internal.ConfigAdapterJmx, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * common.config.internal.ConfigAdapter#loadValue(common.config.internal
+     * .ConfigAdapterJmx, java.lang.String)
      */
     @Override
-    public void loadValue(final ConfigManagerCache jmxloader) throws ConfigException {
+    public void loadValue(final ConfigManagerCache jmxloader)
+            throws ConfigException {
         JsonObject confJson = null;
         InputStream in = getStream(uri, charset, internalConfig);
         if (null == in) {
@@ -147,19 +159,24 @@ public class ConfigAdapterJson implements ConfigAdapter<String> {
             reader.close();
             in.close();
         } catch (IOException e) {
-            throw new ConfigException("Error while closing json config file ", e);
+            throw new ConfigException("Error while closing json config file ",
+                    e);
         }
-        if (confJson != null && confJson.get("Modules") != null && confJson.get("Modules").isJsonObject()) {
+        if (confJson != null && confJson.get("Modules") != null
+                && confJson.get("Modules").isJsonObject()) {
             JsonObject modules = confJson.get("Modules").getAsJsonObject();
             for (Entry<String, JsonElement> entry : modules.entrySet()) {
                 if (entry.getValue() != null && entry.getValue().isJsonObject()) {
-                    jmxloader.insertValue(entry.getKey(), entry.getValue().toString());
+                    jmxloader.insertValue(entry.getKey(), entry.getValue()
+                            .toString());
                 } else {
-                    throw new ConfigRuntimeException("Invalid config format: " + confJson);
+                    throw new ConfigRuntimeException("Invalid config format: "
+                            + confJson);
                 }
             }
         } else {
-            throw new ConfigException("Config format incorrect or file not found ");
+            throw new ConfigException(
+                    "Config format incorrect or file not found ");
         }
     }
 }

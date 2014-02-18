@@ -2,12 +2,11 @@ package org.commons.jconfig.config;
 
 import org.commons.jconfig.annotations.Config;
 import org.commons.jconfig.annotations.ConfigGet;
-import org.commons.jconfig.annotations.ConfigLoaderAdapter;
+import org.commons.jconfig.annotations.ConfigResource;
 import org.commons.jconfig.annotations.ConfigResourceId;
 import org.commons.jconfig.annotations.ConfigSet;
 import org.commons.jconfig.annotations.StringNotEmpty;
 import org.commons.jconfig.datatype.ValueType;
-
 
 /**
  * This class is a sample implementation of XMAS appbase config.
@@ -27,16 +26,12 @@ import org.commons.jconfig.datatype.ValueType;
  * 
  */
 @Config(description = "XMAS appbase config object.")
-@ConfigLoaderAdapter(uri = "App1Missing.json")
+@ConfigResource(name = "app5.json")
 public class App5Config {
 
     private Boolean mUseAttServer = true;
 
-    @ConfigGet(
-            description = "Use attachment Server. Boolean value True/False",
-            type = ValueType.Boolean,
-            defaultValue = "true"
-    )
+    @ConfigGet(description = "Use attachment Server. Boolean value True/False", type = ValueType.Boolean, defaultValue = "true")
     @ConfigResourceId("USE_YM_DOWNLOAD_SERVER")
     public Boolean getUseAttServer() {
         return mUseAttServer;
@@ -62,11 +57,7 @@ public class App5Config {
 
     private String mAttachmentServerHost = "localhost";
 
-    @ConfigGet(
-            description = "Use attachment server hostname",
-            type = ValueType.String,
-            defaultValue = "localhost"
-    )
+    @ConfigGet(description = "Use attachment server hostname", type = ValueType.String, defaultValue = "localhost")
     @ConfigResourceId("YM_DOWNLOAD_SERVER")
     public String getAttachmentServerHost() {
         return mAttachmentServerHost;
