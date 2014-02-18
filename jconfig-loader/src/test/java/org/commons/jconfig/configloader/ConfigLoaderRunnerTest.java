@@ -17,7 +17,8 @@ public class ConfigLoaderRunnerTest {
 
     /**
      * Run below integration test by setting log directory and directory where
-     * config_loader.json is placed. -DJCONFIG_LOG_DIR=.
+     * config_loader.json is placed. 
+     * -DJCONFIG_LOG_DIR=.
      * -DJCONFIG_CDIR=/Users/kinjalkhandhar/git/jconfig/jconfig-loader/conf
      */
     @Test(enabled = false)
