@@ -9,7 +9,6 @@ import org.commons.jconfig.annotations.TimeRange;
 import org.commons.jconfig.datatype.TimeValue;
 import org.commons.jconfig.datatype.ValueType;
 
-
 /**
  * Configuration class for the configuration loader application
  */
@@ -38,14 +37,12 @@ public class ConfigLoaderConfig {
     private String configFileName;
 
     /**
-     * path of configloader config file
+     * Name of generated merged file. All config files listed in
+     * "config_file_list.json" will be read and merged into this file.
      * 
      * @return
      */
-    @ConfigGet(
-            description = "AutoConf downloaded file name.",
-            type = ValueType.String,
-            defaultValue = "/etc/config_loader.json")
+    @ConfigGet(description = "Name of generated merged file.", type = ValueType.String, defaultValue = "/tmp/config_loader.json")
     public String getConfigFileName() {
         return configFileName;
     }
@@ -85,7 +82,7 @@ public class ConfigLoaderConfig {
      * 
      * @return
      */
-    @ConfigGet(description = "Path of filename where Application JMX Mbeans will be written.", type = ValueType.String, defaultValue = "/home/y/logs/yjava_ymail_config_loader/jmx")
+    @ConfigGet(description = "Path of filename where Application JMX Mbeans will be written.", type = ValueType.String, defaultValue = "/tmp/jmx")
     public String getJmxFileName() {
         return jmxFileName;
     }
@@ -121,7 +118,7 @@ public class ConfigLoaderConfig {
      * 
      * @return
      */
-    @ConfigGet(description = "config server file check interval.", type = ValueType.Time, defaultValue = "5 m")
+    @ConfigGet(description = "config server file check interval.", type = ValueType.Time, defaultValue = "1 m")
     public TimeValue getConfigServerReadInterval() {
         return configServerReadInterval;
     }
@@ -133,13 +130,13 @@ public class ConfigLoaderConfig {
     }
 
     /**
-     * ConfigLoader max worker threads, used to push configs to all jvms running. Each jvm requires one thread and hence
-     * this number should always be greater or equal to total number of jvm's running.
+     * ConfigLoader max worker threads, used to push configs to all jvms
+     * running. Each jvm requires one thread and hence this number should always
+     * be greater or equal to total number of jvm's running.
      */
     private Number maxWorkerThreads;
 
-    @ConfigGet(description = "ConfigLoader max worker threads, used to push configs to all jvms running.",
-            type = ValueType.Number, defaultValue = "20")
+    @ConfigGet(description = "ConfigLoader max worker threads, used to push configs to all jvms running.", type = ValueType.Number, defaultValue = "2")
     public Number getMaxWorkerThreads() {
         return maxWorkerThreads;
     }
@@ -148,5 +145,36 @@ public class ConfigLoaderConfig {
     @StringNotEmpty
     public void setMaxWorkerThreads(final Number value) {
         maxWorkerThreads = value;
+    }
+
+    private Boolean loadFromServer;
+
+    @ConfigSet
+    @StringNotEmpty
+    public void setLoadFromServer(final Boolean value) {
+        loadFromServer = value;
+    }
+
+    @ConfigGet(description = "True if configs needs to be queried from conf server and if false it will be queried from filesystem. ", type = ValueType.Boolean, defaultValue = "false")
+    public Boolean getLoadFromServer() {
+        return loadFromServer;
+    }
+
+    private String configPath;
+
+    /**
+     * Config directory where all config files will be found
+     * 
+     * @return
+     */
+    @ConfigGet(description = "Config directory where all config files will be found", type = ValueType.String, defaultValue = "")
+    public String getConfigPath() {
+        return configPath;
+    }
+
+    @ConfigSet
+    @StringNotEmpty
+    public void setConfigPath(final String name) {
+        configPath = name;
     }
 }

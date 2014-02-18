@@ -1,6 +1,6 @@
 # Environment Variables
-#
-#   {JCONFIG_CONF_DIR}   Alternate JCONFIG conf dir. Default is ${JCONFIG_HOME}/conf.
+#   in order to run please set JCONFIG_HOME environment variable - export JCONFIG_HOME=.
+#   {JCONFIG_CDIR}   JCONFIG loader conf directory. Default is ${JCONFIG_HOME}/conf.
 #   {JCONFIG_LOG_DIR}    Where log files are stored.  PWD by default.
 #   {JCONFIG_PID_DIR}    The pid files are stored. /tmp by default.
 #   JCONFIG_IDENT_STRING   A string representing this instance of jconfig loader. $USER by default
@@ -60,8 +60,8 @@ execLoaderProcess() {
     JAVA_HEAP_MAX="-Xmx""$JCONFIG_HEAPSIZE""$SUFFIX"
     #echo $JAVA_HEAP_MAX
   fi
-  # CLASSPATH initially contains $JCONFIG_CONF_DIR
-  CLASSPATH="${JCONFIG_CONF_DIR}"
+  # CLASSPATH initially contains $JCONFIG_CDIR
+  CLASSPATH="${JCONFIG_CDIR}"
   CLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar
 
   #Add the development env class path stuff
@@ -84,8 +84,8 @@ execLoaderProcess() {
 
   CLASS='org.commons.jconfig.configloader.ConfigLoaderRunner'
   export CLASSPATH
-  echo "$JAVA" $JAVA_HEAP_MAX -cp $CLASSPATH $CLASS
-  exec "$JAVA" $JAVA_HEAP_MAX -cp $CLASSPATH $CLASS "$@" < /dev/null > ${logout} 2>&1
+  echo "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR -DJCONFIG_CDIR=$JCONFIG_CDIR -cp $CLASSPATH $CLASS
+  exec "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR -DJCONFIG_CDIR=$JCONFIG_CDIR -cp $CLASSPATH $CLASS -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR  "$@" < /dev/null > ${logout} 2>&1
 }
 
 # the root of the JCONFIG installation
@@ -111,7 +111,7 @@ do
     shift
     confdir=$1
     shift
-    JCONFIG_CONF_DIR=$confdir
+    JCONFIG_CDIR=$confdir
   fi
 done
 
@@ -132,9 +132,9 @@ EOF
   exit 1
 fi
 
-# get log directory
+# get log directory. set JCONFIG_LOG_DIR as java argument. This will be consumed by log4j properties file. 
 if [ "$JCONFIG_LOG_DIR" = "" ]; then
-  export JCONFIG_LOG_DIR="$JCONFIG_HOME/logs"
+  JCONFIG_LOG_DIR="$JCONFIG_HOME/logs"
 fi
 mkdir -p "$JCONFIG_LOG_DIR"
 

@@ -26,7 +26,6 @@ import org.commons.jconfig.internal.WorkerExecutorService;
 import org.commons.jconfig.internal.jmx.ConfigLoaderJvm;
 import org.commons.jconfig.internal.jmx.VirtualMachineException;
 
-
 /**
  * The Configuration Loader application.
  * 
@@ -56,18 +55,21 @@ import org.commons.jconfig.internal.jmx.VirtualMachineException;
  */
 public class ConfigLoaderRunner {
 
-    private final static Logger logger = Logger.getLogger(ConfigLoaderRunner.class);
+    private final static Logger logger = Logger
+            .getLogger(ConfigLoaderRunner.class);
     /**
-     * Appname for ConfigLoader. This name should be used if any beans owned by ConfigLoader needs to be registered to
-     * {@link MBeanServer}
+     * Appname for ConfigLoader. This name should be used if any beans owned by
+     * ConfigLoader needs to be registered to {@link MBeanServer}
      */
     public static final String CONFIG_LOADER_APP_NAME = "org.commons.jconfig.loader";
     /** Excecutor for pushing config values to individual jvm's */
     private WorkerExecutorService executor;
     /** Scheduler for reading jmx values */
-    private final ScheduledExecutorService jmxScheduler = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService jmxScheduler = Executors
+            .newScheduledThreadPool(1);
     /** Scheduler for reading config files from config server. */
-    private final ScheduledExecutorService confServerReader = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService confServerReader = Executors
+            .newScheduledThreadPool(1);
     /** ConfigLoader config */
     private ConfigLoaderConfig config;
 
@@ -75,14 +77,17 @@ public class ConfigLoaderRunner {
      * ConfigLoader config resource directory path. This setting is the only
      * value which is hardcoded.
      */
-    String loaderConfigDirPath = "/home/y/conf/yjava_ymail_config_loader";
+    String loaderConfigDirPath = System.getProperty("JCONFIG_CDIR",
+            "etc/yjava_ymail_config_loader");
 
     /**
      * @param args
      * @throws Exception
      */
-    public static void main(final String[] args) throws InstanceAlreadyExistsException, MBeanRegistrationException,
-    NotCompliantMBeanException, MalformedObjectNameException, NullPointerException, ConfigException {
+    public static void main(final String[] args)
+            throws InstanceAlreadyExistsException, MBeanRegistrationException,
+            NotCompliantMBeanException, MalformedObjectNameException,
+            NullPointerException, ConfigException {
         boolean configLoaderNotFound = false;
         try {
             logger.info("Start running Config loader. ");
@@ -107,12 +112,18 @@ public class ConfigLoaderRunner {
         }
     }
 
-    public void start() throws InstanceAlreadyExistsException, MBeanRegistrationException, NotCompliantMBeanException,
-    MalformedObjectNameException, NullPointerException, ConfigException {
+    public void start() throws InstanceAlreadyExistsException,
+            MBeanRegistrationException, NotCompliantMBeanException,
+            MalformedObjectNameException, NullPointerException, ConfigException {
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-        /* Create ConfigLoaderJmx instance with default constructor, since ConfigLoaderJmx init requires ConfigLoaderConfig which will again result to chicken and egg problem */
+        /*
+         * Create ConfigLoaderJmx instance with default constructor, since
+         * ConfigLoaderJmx init requires ConfigLoaderConfig which will again
+         * result to chicken and egg problem
+         */
         ConfigLoaderJmx mbean = new ConfigLoaderJmx();
-        mbs.registerMBean(mbean, new ObjectName(ConfigLoaderJvm.CONFIG_LOADER_MBEAN_NAME));
+        mbs.registerMBean(mbean, new ObjectName(
+                ConfigLoaderJvm.CONFIG_LOADER_MBEAN_NAME));
 
         loadLoaderConfig();
 
@@ -121,8 +132,9 @@ public class ConfigLoaderRunner {
         startConfServerReader();
 
         startJMXReader();
-        
-        executor = new WorkerExecutorService("ConfigLoaderExecutor", config.getMaxWorkerThreads().intValue());
+
+        executor = new WorkerExecutorService("ConfigLoaderExecutor", config
+                .getMaxWorkerThreads().intValue());
         try {
             logger.info("Start worker job for pushing configs to applications. ");
             executor.submit(new ConfigLoaderWorker(executor, mbean)).get();
@@ -138,7 +150,8 @@ public class ConfigLoaderRunner {
      * save the merged file
      */
     private void startConfServerReader() {
-        logger.info("start reading config files from server " + config.getConfigServerURL());
+        logger.info("start reading config files from server "
+                + config.getConfigServerURL());
 
         final ConfigMerger merger = new ConfigMerger(config);
         Runnable r1 = new Runnable() {
@@ -155,7 +168,8 @@ public class ConfigLoaderRunner {
         };
         logger.info("Start task for reading config files from config server every "
                 + config.getConfigServerReadInterval().toSeconds() + "s");
-        confServerReader.scheduleAtFixedRate(r1, 0, config.getConfigServerReadInterval().toSeconds(), TimeUnit.SECONDS);
+        confServerReader.scheduleAtFixedRate(r1, 0, config
+                .getConfigServerReadInterval().toSeconds(), TimeUnit.SECONDS);
 
     }
 
@@ -167,18 +181,21 @@ public class ConfigLoaderRunner {
      */
     private void loadLoaderConfig() throws ConfigException {
         logger.info("loading ConfigLoaderConfig ");
-        
-		config = new ConfigLoaderConfig();
+
+        config = new ConfigLoaderConfig();
         ConfigManagerConfig configManagerConfig = new ConfigManagerConfig();
         configManagerConfig.setConfigPath(loaderConfigDirPath);
-        ConfigResource anno = ConfigLoaderConfig.class.getAnnotation(ConfigResource.class);
-        ConfigAdapterJson adapter = new ConfigAdapterJson(anno.name(), Charset.forName("UTF-8"), configManagerConfig);
-        ConfigManagerCache localCache = new ConfigManagerCache(ConfigManager.INSTANCE);
+        ConfigResource anno = ConfigLoaderConfig.class
+                .getAnnotation(ConfigResource.class);
+        ConfigAdapterJson adapter = new ConfigAdapterJson(anno.name(),
+                Charset.forName("UTF-8"), configManagerConfig);
+        ConfigManagerCache localCache = new ConfigManagerCache(
+                ConfigManager.INSTANCE);
         adapter.loadValue(localCache);
         localCache.flipCache();
         ConfigContext context = new ConfigContext();
         context.put("TLD", "com");
-        
+
         ConfigManager.INSTANCE.buildConfigObject(config, context, UTF8,
                 localCache);
     }
@@ -207,6 +224,7 @@ public class ConfigLoaderRunner {
         };
         logger.info("Start thread for collecting MBeans for applications running after every "
                 + config.getJmxReadInterval().toSeconds() + "s");
-        jmxScheduler.scheduleAtFixedRate(r1, 30, config.getJmxReadInterval().toSeconds(), TimeUnit.SECONDS);
+        jmxScheduler.scheduleAtFixedRate(r1, 30, config.getJmxReadInterval()
+                .toSeconds(), TimeUnit.SECONDS);
     }
 }
