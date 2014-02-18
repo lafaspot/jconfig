@@ -1,6 +1,6 @@
 # Environment Variables
 #   in order to run please set JCONFIG_HOME environment variable - export JCONFIG_HOME=.
-#   {JCONFIG_CDIR}   JCONFIG loader conf directory. Default is ${JCONFIG_HOME}/conf.
+#   {JCONFIG_CDIR}   JCONFIG loader conf directory. This needs to be passed as --config param while running this script. Default is ${JCONFIG_HOME}/conf.
 #   {JCONFIG_LOG_DIR}    Where log files are stored.  PWD by default.
 #   {JCONFIG_PID_DIR}    The pid files are stored. /tmp by default.
 #   JCONFIG_IDENT_STRING   A string representing this instance of jconfig loader. $USER by default
@@ -85,7 +85,7 @@ execLoaderProcess() {
   CLASS='org.commons.jconfig.configloader.ConfigLoaderRunner'
   export CLASSPATH
   echo "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR -DJCONFIG_CDIR=$JCONFIG_CDIR -cp $CLASSPATH $CLASS
-  exec "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR -DJCONFIG_CDIR=$JCONFIG_CDIR -cp $CLASSPATH $CLASS -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR  "$@" < /dev/null > ${logout} 2>&1
+  exec "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=${JCONFIG_LOG_DIR} -DJCONFIG_CDIR=${JCONFIG_CDIR} -cp $CLASSPATH $CLASS "$@" < /dev/null > ${logout} 2>&1
 }
 
 # the root of the JCONFIG installation
