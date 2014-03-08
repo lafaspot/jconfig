@@ -1,17 +1,54 @@
 # Environment Variables
-#   in order to run please set JCONFIG_HOME environment variable - export JCONFIG_HOME=.
-#   {JCONFIG_CDIR}   JCONFIG loader conf directory. This needs to be passed as --config param while running this script. Default is ${JCONFIG_HOME}/conf.
-#   {JCONFIG_LOG_DIR}    Where log files are stored.  PWD by default.
-#   {JCONFIG_PID_DIR}    The pid files are stored. /tmp by default.
-#   JCONFIG_IDENT_STRING   A string representing this instance of jconfig loader. $USER by default
+#   {JCONFIG_CDIR}  JCONFIG loader conf directory path. 
+#   {JCONFIG_HOME}  ConfigLoader lib directory path. This is the path for all dependency jars. 
+#   {JCONFIG_LOG_DIR} ConfigLoader log directory path. 
+#   
 
-usage="Usage: jconfig-daemon.sh [--config <conf-dir>]\
- (start|stop)"
+libFlag=false
+configFlag=false
 
-# if no args specified, show usage
-if [ $# -le 1 ]; then
-  echo $usage
-  exit 1
+usage="Usage: sh jconfig-daemon.sh [-c configDirectoryPath -l libDirectoryPath -p logDirectoryPath] \
+(start|stop) 
+
+where: 
+    -c  JCONFIG loader conf directory path (required as arg or set it as env var)
+    -l  lib directory path  (required as arg or set it as env var)
+    -p  log directory path (optional. If not specified, logs will be written in libs directory)
+    start - start ConfigLoader application 
+    stop - stop ConfigLoader application. "
+
+# check if JCONFIG_CDIR is set as env var.
+if ! [ -z "$JCONFIG_CDIR" ]; then
+  JCONFIG_CDIR="${JCONFIG_CDIR}"
+  configFlag=true
+fi
+
+# check if JCONFIG_HOME is set as env var.
+if ! [ -z "$JCONFIG_HOME" ]; then
+  JCONFIG_HOME="${JCONFIG_HOME}"
+  libFlag=true
+fi
+
+while getopts ':c:l:p:' option; do
+  case "$option" in
+    c) configFlag=true; JCONFIG_CDIR=$OPTARG
+       ;;
+    l) libFlag=true;JCONFIG_HOME=$OPTARG
+       ;;
+    p) JCONFIG_LOG_DIR=$OPTARG
+       ;;
+   \?) printf "illegal option: -%s\n" "$OPTARG" 
+       echo "$usage"
+       exit 1
+       ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if ! $libFlag || ! $configFlag
+then
+    echo "$usage" 
+    exit 1
 fi
 
 this="${BASH_SOURCE-$0}"
@@ -21,99 +58,13 @@ script=`basename "$this"`
 bin=`cd "$bin">/dev/null; pwd`
 this="$bin/$script"
 
-check_before_start(){
-    #ckeck if the process is not running
-    mkdir -p "$JCONFIG_PID_DIR"
-    if [ -f $pid ]; then
-      if kill -0 `cat $pid` > /dev/null 2>&1; then
-        echo $command running as process `cat $pid`.  Stop it first.
-        exit 1
-      fi
-    fi
-}
-
-add_to_cp_if_exists() {
-  if [ -d "$@" ]; then
-    CLASSPATH=${CLASSPATH}:"$@"
-  fi
-}
-
-execLoaderProcess() {
-  # Detect if we are in JCONFIG sources dir
-  in_dev_env=false
-  if [ -d "${JCONFIG_HOME}/target" ]; then
-    in_dev_env=true
-  fi  
-
-  JAVA_HEAP_MAX=-Xmx2000m 
-
-  # check envvars which might override default args
-  if [ "$JCONFIG_HEAPSIZE" != "" ]; then
-    SUFFIX="m"
-    if [ "${JCONFIG_HEAPSIZE: -1}" == "m" ] || [ "${JCONFIG_HEAPSIZE: -1}" == "M" ]; then
-      SUFFIX=""
-    fi
-    if [ "${JCONFIG_HEAPSIZE: -1}" == "g" ] || [ "${JCONFIG_HEAPSIZE: -1}" == "G" ]; then
-      SUFFIX=""
-    fi
-    #echo "run with heapsize $JCONFIG_HEAPSIZE"
-    JAVA_HEAP_MAX="-Xmx""$JCONFIG_HEAPSIZE""$SUFFIX"
-    #echo $JAVA_HEAP_MAX
-  fi
-  # CLASSPATH initially contains $JCONFIG_CDIR
-  CLASSPATH="${JCONFIG_CDIR}"
-  CLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar
-
-  #Add the development env class path stuff
-  if $in_dev_env; then
-    #add_to_cp_if_exists "${JCONFIG_HOME}/jconfig-loader/target/libs"
-  # Add jconfig-loader.jar from target directory to classpath. 
-  for f in ${JCONFIG_HOME}/jconfig-loader/target/libs/*.jar; do
-    CLASSPATH=${CLASSPATH}:$f;
-  done
-  for f in ${JCONFIG_HOME}/jconfig-loader/target/*.jar; do
-    CLASSPATH=${CLASSPATH}:$f;
-  done
-
-  fi
-
-  # Add libs to CLASSPATH
-  for f in $JCONFIG_HOME/lib/*.jar; do
-    CLASSPATH=${CLASSPATH}:$f;
-  done
-
-  CLASS='org.commons.jconfig.configloader.ConfigLoaderRunner'
-  export CLASSPATH
-  echo "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=$JCONFIG_LOG_DIR -DJCONFIG_CDIR=$JCONFIG_CDIR -cp $CLASSPATH $CLASS
-  exec "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=${JCONFIG_LOG_DIR} -DJCONFIG_CDIR=${JCONFIG_CDIR} -cp $CLASSPATH $CLASS "$@" < /dev/null > ${logout} 2>&1
-}
-
-# the root of the JCONFIG installation
-if [ -z "$JCONFIG_HOME" ]; then
-  export JCONFIG_HOME=`dirname "$this"`/..
-  echo $JCONFIG_HOME
-fi
-
 if [ "$JCONFIG_PID_DIR" = "" ]; then
   JCONFIG_PID_DIR=/tmp
 fi
 
-
 if [ "$JCONFIG_IDENT_STRING" = "" ]; then
-  export JCONFIG_IDENT_STRING="$USER"
+  JCONFIG_IDENT_STRING="$USER"
 fi
-
-#check to see if the conf dir or jconfig home are given as an optional arguments
-while [ $# -gt 1 ]
-do
-  if [ "--config" = "$1" ]
-  then
-    shift
-    confdir=$1
-    shift
-    JCONFIG_CDIR=$confdir
-  fi
-done
 
 # if we didn't set it
 if [ -z "$JAVA_HOME" ]; then
@@ -152,16 +103,82 @@ if [ "$JAVA_HOME" = "" ]; then
   echo "Error: JAVA_HOME is not set."
   exit 1
 fi
-echo $JAVA_HOME
-export JCONFIG_LOG_PREFIX=jconfig-$JCONFIG_IDENT_STRING-loader
+#echo $JAVA_HOME
 JAVA=$JAVA_HOME/bin/java
 logout=$JCONFIG_LOG_DIR/$JCONFIG_LOG_PREFIX.out
 pid=$JCONFIG_PID_DIR/jconfig-$JCONFIG_IDENT_STRING-loader.pid
-export JCONFIG_START_FILE=$JCONFIG_PID_DIR/jconfig-$JCONFIG_IDENT_STRING-loader.autorestart
+JCONFIG_START_FILE=$JCONFIG_PID_DIR/jconfig-$JCONFIG_IDENT_STRING-loader.autorestart
 
 # get arguments
 startStop=$1
 shift
+
+check_before_start(){
+    #ckeck if the process is not running
+    mkdir -p "$JCONFIG_PID_DIR"
+    if [ -f $pid ]; then
+      if kill -0 `cat $pid` > /dev/null 2>&1; then
+        echo $command running as process `cat $pid`.  Stop it first.
+        exit 1
+      fi
+    fi
+}
+
+add_to_cp_if_exists() {
+  if [ -d "$@" ]; then
+    CLASSPATH=${CLASSPATH}:"$@"
+  fi
+}
+
+execLoaderProcess() {
+  # Detect if we are in JCONFIG sources dir
+  in_dev_env=false
+  if [ -d "${JCONFIG_HOME}/target" ]; then
+    in_dev_env=true
+  fi  
+
+  JAVA_HEAP_MAX=-Xmx2000m 
+
+  # check envvars which might override default args
+  if ! [ "x$JCONFIG_HEAPSIZE" == "x" ]; then
+    SUFFIX="m"
+    if [ "${JCONFIG_HEAPSIZE: -1}" == "m" ] || [ "${JCONFIG_HEAPSIZE: -1}" == "M" ]; then
+      SUFFIX=""
+    fi
+    if [ "${JCONFIG_HEAPSIZE: -1}" == "g" ] || [ "${JCONFIG_HEAPSIZE: -1}" == "G" ]; then
+      SUFFIX=""
+    fi
+    #echo "run with heapsize $JCONFIG_HEAPSIZE"
+    JAVA_HEAP_MAX="-Xmx""$JCONFIG_HEAPSIZE""$SUFFIX"
+    #echo $JAVA_HEAP_MAX
+  fi
+  # CLASSPATH initially contains $JCONFIG_CDIR
+  CLASSPATH="${JCONFIG_CDIR}"
+  CLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar
+
+  #Add the development env class path stuff
+  if $in_dev_env; then
+    #add_to_cp_if_exists "${JCONFIG_HOME}/jconfig-loader/target/libs"
+  # Add jconfig-loader.jar from target directory to classpath. 
+  for f in ${JCONFIG_HOME}/jconfig-loader/target/libs/*.jar; do
+    CLASSPATH=${CLASSPATH}:$f;
+  done
+  for f in ${JCONFIG_HOME}/jconfig-loader/target/*.jar; do
+    CLASSPATH=${CLASSPATH}:$f;
+  done
+
+  fi
+
+  # Add libs to CLASSPATH
+  for f in $JCONFIG_HOME/lib/*.jar; do
+    CLASSPATH=${CLASSPATH}:$f;
+  done
+
+  CLASS='org.commons.jconfig.configloader.ConfigLoaderRunner'
+  export CLASSPATH
+  echo "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=${JCONFIG_LOG_DIR} -DJCONFIG_CDIR=${JCONFIG_CDIR} -cp $CLASSPATH $CLASS
+  exec "$JAVA" $JAVA_HEAP_MAX -DJCONFIG_LOG_DIR=${JCONFIG_LOG_DIR} -DJCONFIG_CDIR=${JCONFIG_CDIR} -cp $CLASSPATH $CLASS "$@" & < /dev/null > ${logout} 2>&1
+}
 
 case $startStop in
 
@@ -179,8 +196,7 @@ case $startStop in
       pidToKill=`cat $pid`
       # kill -0 == see if the PID exists
       if kill -0 $pidToKill > /dev/null 2>&1; then
-        echo -n stopping $command
-        echo "`date` Terminating $command" >> $loglog
+        echo "`date` Terminating $command" >> ${logout}
         kill $pidToKill > /dev/null 2>&1
         rm $pid
       else
@@ -192,7 +208,7 @@ case $startStop in
     fi
   ;;
 (*)
-  echo $usage
+  echo "$usage"
   exit 1
   ;;
-esac    
+esac

@@ -42,8 +42,10 @@ public class ConfManCmd {
 
     void init() {
         options.addOption("h", "help", false, "print this message");
-        options.addOption("v", "version", false, "print the version information and exit");
-        options.addOption("l", "list", false, "list all jmx beans from all jvms");
+        options.addOption("v", "version", false,
+                "print the version information and exit");
+        options.addOption("l", "list", false,
+                "list all jmx beans from all jvms");
         options.addOption("j", "jvms", false, "list all jvms");
         options.addOption("u", "unformatted", false, "unformatted json output");
         options.addOption("s", "save", true, "save json to a file");
@@ -86,8 +88,8 @@ public class ConfManCmd {
                 }
                 String filename = cmd.getOptionValue("save");
                 File currFile = new File(filename);
-                File tmpFile = File.createTempFile("jmx", null, currFile.getParentFile());
-                System.out.println(currFile.getParentFile());
+                File tmpFile = File.createTempFile("jmx", null,
+                        currFile.getParentFile());
                 Writer writer = new FileWriter(tmpFile);
                 writer.write(data);
                 writer.close();
@@ -96,7 +98,9 @@ public class ConfManCmd {
                     if (currFile.delete()) {
                         tmpFile.renameTo(currFile);
                     } else {
-                        logger.error("Error deleting file " + currFile.getName() + ". Cannot rename temp file "
+                        logger.error("Error deleting file "
+                                + currFile.getName()
+                                + ". Cannot rename temp file "
                                 + tmpFile.getName());
                     }
                 } else {
