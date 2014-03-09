@@ -18,3 +18,4 @@ Example
 NuclearApp in jconfig-test package consumes config via JCONFIG. If Config loader is not running it will run with defaults specified
 in NuclearConfig class file. 
 
+1. https://github.com/jaikit/jconfig/wiki
