@@ -1,0 +1,41 @@
+{
+   "Modules" : {
+        "org.commons.jconfig.test.NuclearConfig" : {
+            "_Sets_Type_": "SUBSET1",
+            "_Sets_": [
+                {           
+                    "key": [ "1" ],
+                    "keyList": {
+                        "CacheSize" : "1MiB",
+                        "HostUrl" : "hosturl1",
+                        "HostPort": "1",
+                        "HostProxy" : "/proxy1"
+                    }
+                },
+                {   
+                    "key": [ "2" ],
+                    "keyList": {
+                        "CacheSize" : "2MiB",
+                        "HostUrl" : "hosturl2",
+                        "HostPort": "2",
+                        "HostProxy" : "/proxy2"
+                    }
+                },
+                {
+                    "key": [ "3" ],
+                    "keyList": {
+                        "CacheSize" : "3MiB",
+                        "HostUrl" : "hosturl3",
+                        "HostPort": "3",
+                        "HostProxy" : "/proxy3"
+                    }
+                }
+            ],
+            "CacheSize" : "100MiB",
+            "HostUrl" : "hostUrl100",
+            "HostPort": "0",
+            "HostProxy" : "/proxy100"
+        }
+    }
+}
+
