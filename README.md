@@ -1,4 +1,4 @@
-Java distributed real time configuration system designed to support machine with multiples cpu and large numbers of threads with reduced contention.
+Java distributed real time configuration system that is designed to scale well for multiple cpus machines and reduce contention when using large number of threads.
 
 Usage: sh jconfig-daemon.sh [-c configDirectoryPath -l libDirectoryPath -p logDirectoryPath] 
 (start|stop) 
