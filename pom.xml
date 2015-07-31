@@ -2,30 +2,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.commons.jconfig</groupId>
-    <artifactId>jconfig-configuration</artifactId>
-    <packaging>pom</packaging>
-    <version>4.0-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <url>https://github.com/jaikit/jconfig</url>
-    <description>Parent POM file for project ${project.name}</description>
-    <prerequisites>
-        <maven>2.1</maven>
-    </prerequisites>
+	<groupId>com.github.lafa.jconfig</groupId>
+	<artifactId>jconfig</artifactId>
+	<packaging>pom</packaging>
+	<version>4.0.1</version>
+	<name>${project.artifactId}</name>
+	<url>https://github.com/lafa/logfast</url>
+	<description>Parent POM file for project ${project.name}</description>
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+	
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/jaikit/jconfig/issues</url>
+        <url>https://github.com/lafaspot/jconfig/issues</url>
     </issueManagement>
 
     <modules>
-        <module>jconfig-manager</module>
-        <module>jconfig-loader</module>
-        <module>jconfig-test</module>
+        <module>manager</module>
+        <module>loader</module>
+        <module>test</module>
     </modules>
     <scm>
-        <url>https://github.com/jaikit/jconfig</url>
-        <connection>scm:git:git://github.com/jaikit/jconfig.git</connection>
-        <developerConnection>scm:git:git@github.com:jaikit/github-jaikit.git</developerConnection>
+        <url>https://github.com/lafaspot/jconfig</url>
+        <connection>scm:git:git://github.com/lafaspot/jconfig.git</connection>
+        <developerConnection>scm:git:git@github.com:lafaspot/github-jaikit.git</developerConnection>
     </scm>
     <properties>
         <buildtype>test</buildtype>
@@ -34,19 +35,11 @@
         <jdk.version>1.6</jdk.version>
         <excludedTestLibraris>jmockit</excludedTestLibraris>
     </properties>
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Maven Repository Switchboard</name>
-            <layout>default</layout>
-            <url>http://repo1.maven.org/maven2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    
     <dependencies>
+    <!-- DON'T ADD DEPENDENCIES TO THIS FILE -->
     </dependencies>
+    
     <dependencyManagement>
         <dependencies>
             <dependency>

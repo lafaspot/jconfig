@@ -2,21 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.commons.jconfig</groupId>
-        <artifactId>jconfig-configuration</artifactId>
-        <version>4.0-SNAPSHOT</version>
+        <groupId>com.github.lafa.jconfig</groupId>
+        <artifactId>jconfig</artifactId>
+        <version>4.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.commons.jconfig.loader</groupId>
-    <artifactId>jconfig-loader</artifactId>
+    <artifactId>jconfig.loader</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <url>https://github.com/jaikit/jconfig/</url>
+    <url>https://github.com/lafaspot/jconfig/</url>
     <description>Config Loader code: ${project.name} package</description>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/jaikit/jconfig/issues</url>
+        <url>https://github.com/lafaspot/jconfig/issues</url>
     </issueManagement>
 
     <build>
