@@ -1,5 +1,8 @@
 Java distributed real time configuration system that is designed to scale well for multiple cpus machines and reduce contention when using large number of threads.
 
+Documentation
+https://github.com/lafaspot/jconfig/wiki
+
 Usage: sh jconfig-daemon.sh [-c configDirectoryPath -l libDirectoryPath -p logDirectoryPath] 
 (start|stop) 
 
@@ -18,9 +21,7 @@ If both are set priority will be given to arguments passed while running script.
 
 Example
 NuclearApp in jconfig-test package consumes config via JCONFIG. If Config loader is not running it will run with defaults specified
-in NuclearConfig class file. 
-
-https://github.com/lafaspot/jconfig/wiki
+in NuclearConfig class file.
 
 Development 
 
