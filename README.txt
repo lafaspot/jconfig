@@ -32,5 +32,5 @@ For contibutors run deploy to do a push to nexus servers
 $ mvn clean deploy -Dgpg.passphrase=[pathPhrase]
 
 All Pull requests need to pass continous integration before being merged.
-Please goto https://github.com/lafaspot/jconfig
+Please goto https://travis-ci.org/lafaspot/jconfig
   
