@@ -72,8 +72,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.commons.jconfig.manager</groupId>
-            <artifactId>jconfig-manager</artifactId>
+            <groupId>com.github.lafa.jconfig</groupId>
+            <artifactId>jconfig.manager</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -104,17 +104,11 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.3.2</version>
         </dependency>
     </dependencies>
 </project>
