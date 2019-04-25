@@ -19,6 +19,10 @@
     </issueManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+        </dependency>
         <!-- Pure Java dependencies -->
         <dependency>
             <groupId>log4j</groupId>
