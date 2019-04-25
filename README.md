@@ -16,8 +16,8 @@ More detailed document is [here](https://github.com/lafaspot/jconfig/wiki)
 
 ## Usage
 
-```sh jconfig-daemon.sh [-c configDirectoryPath -l libDirectoryPath -p logDirectoryPath] 
-(start|stop) 
+```
+sh jconfig-daemon.sh [-c configDirectoryPath -l libDirectoryPath -p logDirectoryPath] (start|stop) 
 
 where: 
     -c  JCONFIG loader conf directory path (required as arg or set it as env var)
@@ -39,10 +39,14 @@ in NuclearConfig class file.
 ## Development
 
 To build before you submit a PR
+```
 $ mvn clean install
+```
 
 For contibutors, run deploy to do a push to nexus servers
+```
 $ mvn clean deploy -Dgpg.passphrase=[pathPhrase]
+```
 
 All pull requests need to pass continous integration before being merged.
 Please go to https://travis-ci.org/lafaspot/jconfig
